@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'Thoren Sans Heavy';
+  src: url('Thoren Sans Heavy.otf') format('opentype');
+}
+
+h1 {
+  font-family: 'Thoren Sans Heavy', sans-serif;
+  color: #ffffff;
+  font-size: 80px;
+  margin-bottom: 5px;
+}
+body {
+  background-color: #0f0f0f;
+    color: #ffffff;
+}
+.divider {
+  border: none;
+  border-top: 30px solid #ffffff;
+  width: 37%;
+  margin: 0 auto;
+}
+.divider span {
+  display: block;
+  position: relative;
+  top: -26px;
+  background-color: #ffffff;
+  padding: 0 10px;
+  color: #000000;
+  font-family: 'Thoren Sans Heavy', sans-serif;
+  font-size: 20px;
+
+
+}
+.wrapper {display: table-cell; vertical-align: middle; text-align: center}
+
+.divider span a {
+  margin: 0 5px;
+}
+
+.fa-linkedin, .fa-github {
+  font-size: 24px;
+  color: #000000;
+}

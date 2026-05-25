@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Daniel Andrews Splash</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body {top: 0; left: 0; width: 99%; height: 97%;
+    position: absolute; display: table; color: #0f0f0f}
+  span {color: #ffffff}
+#timezone * {text-decoration: none;}
+
+
+</style>
+
+<script type="text/javascript">
+    // declare time zone formatting
+    let options = {
+        timeZone: 'America/New_York',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    },
+    formatter = new Intl.DateTimeFormat([], options);
+
+    // set time
+    setInterval(
+        () => {
+            document.querySelector("#time").innerText = formatter.format(new Date());
+        }
+    , 1000)
+</script>
+</head>
+
+
+
+
+
+<body><div class = "wrapper">
+    <br>
+    <br>
+<img src="myfp.png" style="width:560px;"><br>
+<h1>I'm daniel,</h1> 
+<div class="divider"><span><a href="p2.html">about/work</a> <a href="p3.html">SEG3125</a>  links:<a href="https://www.linkedin.com/in/daniel-andrews-425a28337/"><i class="fa-brands fa-linkedin"></i></a><a href="https://github.com/danielhandrewsntb"><i class="fa-brands fa-github"></i></a></span></div>
+<span id="timezone">
+<i>
+<a href="https://24timezones.com/Ottawa/time">Current time in Ottawa</a> - <span id="time"></span> <a href="https://24timezones.com/time-zone/est">EST</a>
+</i>
+</span>
+<br><br>
+
+
+
+
+
+
+</div></body></html>
