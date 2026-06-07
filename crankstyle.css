@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Industry Test Black';
+  src: url('IndustryTest-Black.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Industry Test Book';
+  src: url('IndustryTest-Book.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Industry Test Bold';
+  src: url('IndustryTest-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Industry Test Thin';
+  src: url('IndustryTest-Thin.otf') format('opentype');
+}
+.mainimage, .logoimage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainimage img {
+  width: 50%;       
+  height: auto;       
+}
+
+.logoimage img {
+  width: 60%;       
+  height: auto;       
+}
+
+h2 {
+	font-family: 'Industry Test Black';
+}
+
+h3 {
+	font-family: 'Industry Test Book';
+}
+h1 {
+  font-family: 'Industry Test Bold';
+  text-align: center;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #0f0f0f;
+  font-family: 'Industry Test Black';
+  font-size: 16px;
+  padding: 10px 24px;
+  border: 2px solid #0f0f0f;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+  background: #0f0f0f;
+  color: #ffffff;
+}
+#author {
+  font-family: 'Industry Test Thin';
+}
+html {
+  scroll-behavior: smooth;
+}
+

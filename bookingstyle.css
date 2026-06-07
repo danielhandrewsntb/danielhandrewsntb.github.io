@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'Industry Test Book';
+  src: url('IndustryTest-Book.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Industry Test Black';
+  src: url('IndustryTest-Black.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Industry Test Light Italic';
+  src: url('IndustryTest-LightItalic.otf') format('opentype');
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  gap: 10px;
+  padding: 20px;
+  font-family: 'Industry Test Book';
+}
+
+form label {
+  font-weight: bold;
+  margin-bottom: 2px;
+  font-family: 'Industry Test Book';
+}
+
+form input,
+form select,
+form textarea {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+}
+
+form textarea {
+  height: 120px;
+}
+
+form button {
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-family: 'Industry Test Book';
+}
+ .logoimage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  font-family: 'Industry Test Black';
+  text-align: center;
+}
+h3 {
+  font-family: 'Industry Test Light Italic';
+  text-align: center;
+  color: #ff0000;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bookingstyle.css">
+	<title>Book A Service - CrankShop</title>
+</head>
+<body>
+	<div class = "logoimage">
+		<img src="truncatelogo.png">
+	</div>
+	<h1>Book Service With Us!</h1>
+	<h3>Please note that due to high demand, we do not typically accept walk-ins.</h3>
+	<h3>After requesting service, we will email you with the confirmation time for your appointment at our earliest convenience.</h3>
+	<form action="mailto:you@crankshop.com" method="post" enctype="text/plain">
+  <label>Full Name</label>
+  <input type="text" name="name">
+
+  <label>Email</label>
+  <input type="email" name="email">
+
+  <label>Phone</label>
+  <input type="tel" name="phone">
+
+  <label>Service</label>
+  <select name="service">
+    <option>Major Tune Up</option>
+    <option>Fundemental Tune Up</option>
+    <option>Shock Basic Service</option>
+    <option>Force Basic Service</option>
+    <option>Wheel Build</option>
+    <option>Small Repair</option>
+    <option>Large Repair</option>
+    <option>General Service</option>
+    <option>Other (Detail Below)</option>
+  </select>
+
+  <label>Preferred Date</label>
+  <input type="date" name="date">
+
+  <label>Location</label>
+  <select name="location">
+    <option>Griffintown</option>
+    <option>Hochelaga</option>
+  </select>
+
+  <label>Details To Help Us Out (If Necessary)</label>
+  <textarea name="message"></textarea>
+
+  <button type="submit">Book Now</button>
+</form>
+
+</body>
+</html>
