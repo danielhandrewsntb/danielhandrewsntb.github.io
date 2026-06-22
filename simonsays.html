@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play Simon</title>
+<link rel="stylesheet" href="simonsaysstyle.css">
+</head>
+<body>
+
+  <h1>Play Simon</h1>
+  <div class="status" id="status">Press The Flashing Green Button To Begin</div>
+
+  <div class="level-display">
+  <div class="level-number" id="level">0</div>
+  <div class="level-label">Level</div>
+</div>
+
+  <div class="disc-wrap" id="discWrap">
+    <img id="discImg" src="IMG_2390.png" alt="Simon disc">
+    <button class="quad-btn" id="btn-green"  data-color="green"></button>
+    <button class="quad-btn" id="btn-red"    data-color="red"></button>
+    <button class="quad-btn" id="btn-yellow" data-color="yellow"></button>
+    <button class="quad-btn" id="btn-blue"   data-color="blue"></button>
+  </div>
+
+  <div class="best-display">
+  Record: <span id="best">0</span>
+</div>
+
+<div class = 'scorerslabel'>All-Time Leaderboad:
+  <ol id="leaderboard-list"></ol>
+  </div>
+  <div id="author"><a href="dannyha.html">About the Designer</a></div>
+<script type = "module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  limit
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCJOAlXEsaPUl5SfmbrPNRAtX_KB8hV-YM",
+    authDomain: "simonleaderboard.firebaseapp.com",
+    projectId: "simonleaderboard",
+    storageBucket: "simonleaderboard.firebasestorage.app",
+    messagingSenderId: "587826390705",
+    appId: "1:587826390705:web:fa3feb4e885491b6af2490",
+};
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+(() => {
+
+  const colors = ["green", "red", "yellow", "blue"];
+
+  const discImg = document.getElementById("discImg");
+  const statusEl = document.getElementById("status");
+  const levelEl = document.getElementById("level");
+  const bestEl = document.getElementById("best");
+  const leaderboardEl = document.getElementById("leaderboard-list");
+  const deathSound = new Audio("Bloxorz Soundtrack - Death.mp3");
+  const discWrap = document.getElementById("discWrap");
+
+  const discSrc = {
+    off: "IMG_2390.png",
+    green: "IMG_2391.png",
+    red: "IMG_2392.png",
+    yellow: "IMG_2393.png",
+    blue: "IMG_2394.png",
+  };
+
+  const tones = {
+    green: 329.63,
+    red: 277.18,
+    yellow: 220.00,
+    blue: 164.81,
+  };
+
+  let sequence = [];
+  let playerStep = 0;
+  let best = Number(localStorage.getItem("simonBest") || 0);
+  let acceptingInput = false;
+  let playing = false;
+  let gameStarted = false;
+  bestEl.textContent = best;
+
+  Object.values(discSrc).forEach(src => { const i = new Image(); i.src = src; });
+
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioCtx;
+  }
+
+  function playTone(color, duration = 400) {
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = tones[color];
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration / 1000);
+    osc.start();
+    osc.stop(ctx.currentTime + duration / 1000);
+  }
+
+  function litUp(color, duration = 400) {
+    discImg.src = discSrc[color];
+    playTone(color, duration);
+  }
+
+  function litOff() {
+    discImg.src = discSrc.off;
+  }
+
+  function stepDelayForLevel(level) {
+    return Math.max(280, 700 - level * 15);
+  }
+
+  function addToSequence() {
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    sequence.push(randomColor);
+  }
+
+  function playSequence() {
+    playing = true;
+    acceptingInput = false;
+    statusEl.textContent = "Watch closely...";
+
+    const delay = stepDelayForLevel(sequence.length);
+    let i = 0;
+
+    function step() {
+      if (i >= sequence.length) {
+        playing = false;
+        acceptingInput = true;
+        playerStep = 0;
+        statusEl.textContent = "Your turn";
+        return;
+      }
+      const color = sequence[i];
+      litUp(color, delay * 0.6);
+      setTimeout(() => {
+        litOff();
+        i++;
+        setTimeout(step, delay * 0.25);
+      }, delay * 0.6);
+    }
+
+    setTimeout(step, 500);
+  }
+
+  function handlePlayerInput(color) {
+    if (!gameStarted) {
+      if (color === "green") {
+        startGame();
+      }
+      return;
+    }
+
+    if (!acceptingInput) return;
+
+    litUp(color, 250);
+    setTimeout(litOff, 250);
+
+    if (color === sequence[playerStep]) {
+      playerStep++;
+      if (playerStep === sequence.length) {
+        acceptingInput = false;
+        levelEl.textContent = sequence.length;
+        if (sequence.length > best) {
+          best = sequence.length;
+          bestEl.textContent = best;
+          localStorage.setItem("simonBest", best);
+        }
+        statusEl.textContent = "Nice! Next round...";
+        setTimeout(() => {
+          addToSequence();
+          playSequence();
+        }, 900);
+      }
+    } else {
+      acceptingInput = false;
+      gameOver();
+    }
+  }
+
+  function gameOver() {
+    checkAndAddLeaderboard(sequence.length);
+    statusEl.textContent = `Game over — you reached level ${sequence.length}. Press the flashing green button to try again.`;
+    playing = false;
+    gameStarted = false;
+    sequence = [];
+    playerStep = 0;
+    levelEl.textContent = 0;
+    litOff();
+    deathSound.currentTime = 0; 
+    deathSound.play();
+    discWrap.classList.add("shake");
+    setTimeout(() => discWrap.classList.remove("shake"), 500);
+    startIdleFlash();
+  }
+
+  function startGame() {
+    stopIdleFlash();
+    getAudioCtx();
+    gameStarted = true;
+    sequence = [];
+    playerStep = 0;
+    levelEl.textContent = 0;
+    statusEl.textContent = "Get ready...";
+    addToSequence();
+    setTimeout(playSequence, 700);
+  }
+
+  let idleInterval = null;
+  function startIdleFlash() {
+    let on = false;
+    idleInterval = setInterval(() => {
+      on = !on;
+      discImg.src = on ? discSrc.green : discSrc.off;
+    }, 600);
+  }
+  function stopIdleFlash() {
+    if (idleInterval) {
+      clearInterval(idleInterval);
+      idleInterval = null;
+    }
+  }
+  async function renderLeaderboard() {
+    leaderboardEl.innerHTML = "<li>Loading...</li>";
+    try {
+      const q        = query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(10));
+      const snapshot = await getDocs(q);
+      leaderboardEl.innerHTML = "";
+      if (snapshot.empty) {
+        leaderboardEl.innerHTML = "<li>No scores yet — be the first!</li>";
+        return;
+      }
+      snapshot.forEach(doc => {
+        const { name, score } = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `${name} — Level ${score}`;
+        leaderboardEl.appendChild(li);
+      });
+    } catch (err) {
+      console.error("Leaderboard read failed:", err);
+      leaderboardEl.innerHTML = "<li>Couldn't load leaderboard.</li>";
+    }
+  }
+
+async function checkAndAddLeaderboard(finalScore) {
+    if (finalScore === 0) return;
+    try {
+      const q        = query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(10));
+      const snapshot = await getDocs(q);
+      const scores   = snapshot.docs.map(d => d.data().score);
+      const qualifies = scores.length < 10 || finalScore > scores[scores.length - 1];
+
+      if (!qualifies) return;
+
+      setTimeout(async () => {
+        const name = prompt("You made the leaderboard! Enter your name:") || "Anonymous";
+        try {
+          await addDoc(collection(db, "leaderboard"), { name, score: finalScore });
+          renderLeaderboard();
+        } catch (err) {
+          console.error("Leaderboard write failed:", err);
+        }
+      }, 600);
+    } catch (err) {
+      console.error("Leaderboard qualification check failed:", err);
+    }
+  }
+
+  document.querySelectorAll(".quad-btn").forEach(btn => {
+    btn.addEventListener("click", () => handlePlayerInput(btn.dataset.color));
+  });
+  startIdleFlash();
+  renderLeaderboard();
+  
+
+
+})();
+</script>
+
+</body>
+</html>

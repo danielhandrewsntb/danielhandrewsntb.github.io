@@ -1,0 +1,196 @@
+:root {
+  --bg: #1a1a1a;
+}
+@font-face {
+  font-family: 'Serpentine Sans Bold';
+  src: url('Serpentine Sans ICG Bold.ttf') format('truetype');
+  font-weight: 200; 
+  font-style: normal;
+}
+@font-face {
+  font-family: 'AutoProm Pro Thin';
+  src: url('Stefan Stoychev - AutopromPro-Thin.otf') format('opentype');
+  font-weight: 200; 
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Industry Test Thin';
+  src: url('IndustryTest-Thin.otf') format('opentype');
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #eee;
+    padding: 20px;
+    animation: bgFade 12s ease-in-out infinite;
+  }
+  @keyframes bgFade {
+  0%   { background-color: #2e8b3d; } /* green */
+  25%  { background-color: #c0392b; } /* red */
+  50%  { background-color: #d4a82f; } /* yellow */
+  75%  { background-color: #1f4fa3; } /* blue */
+  100% { background-color: #2e8b3d; } /* back to green */
+}
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-8px) rotate(-1deg); }
+  30%  { transform: translateX(7px) rotate(1deg); }
+  45%  { transform: translateX(-6px) rotate(-1deg); }
+  60%  { transform: translateX(5px) rotate(1deg); }
+  75%  { transform: translateX(-3px); }
+  90%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.5s ease;
+}
+
+  h1 {
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+    font-family: 'Serpentine Sans Bold';
+  }
+
+  .status {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    min-height: 1.5em;
+    color: #ccc;
+    font-family: 'AutoProm Pro Thin';
+
+  }
+
+  .level-display {
+  text-align: center;
+  margin-bottom: 18px;
+  font-family: 'AutoProm Pro Thin';
+}
+
+.level-number {
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  font-family: 'AutoProm Pro Thin';
+}
+
+.level-label {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+  margin-top: 4px;
+  font-family: 'AutoProm Pro Thin';
+}
+
+.best-display {
+  margin-top: 18px;
+  font-size: 1rem;
+  color: #ccc;
+  text-align: center;
+  font-family: 'AutoProm Pro Thin';
+}
+
+.best-display span {
+  font-weight: bold;
+  color: #fff;
+  font-family: 'AutoProm Pro Thin';
+}
+
+  .disc-wrap {
+    position: relative;
+    width: min(420px, 90vw);
+    aspect-ratio: 1 / 1;
+    user-select: none;
+  }
+
+  .disc-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  .quad-btn {
+    position: absolute;
+    width: 48%;
+    height: 48%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .quad-btn:active {
+    filter: brightness(0.92);
+  }
+
+  #btn-green  { top: 0;   left: 0; }
+  #btn-red    { top: 0;   right: 0; }
+  #btn-yellow { bottom: 0; left: 0; }
+  #btn-blue   { bottom: 0; right: 0; }
+
+  .controls {
+    margin-top: 24px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  button.action {
+    background: #c0392b;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: transform 0.1s ease, background 0.2s ease;
+  }
+
+  button.action:hover { background: #a93226; }
+  button.action:active { transform: scale(0.96); }
+
+  .strict-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #bbb;
+  }
+
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .scorerslabel {
+      font-family: 'AutoProm Pro Thin';
+      text-align: center;
+
+  }
+  .scorerslabel ol {
+  padding-left: 20px;
+  margin-top: 10px;
+  color: #fff;
+  font-family: 'AutoProm Pro Thin', sans-serif;
+  text-align: center;
+}
+
+.scorerslabel li {
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+#author {
+  font-family: 'Industry Test Thin';
+}
