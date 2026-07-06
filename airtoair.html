@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="Ecorphomestyle.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Air To Air</title>
+</head>
+<body>
+
+
+
+	<div id="root"></div>
+
+	<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+	
+	<script type="text/babel" src="Navbar.jsx"></script>
+	<script type="text/babel" src="AirToAir.jsx"></script>
+	<script type="text/babel">
+		const root = ReactDOM.createRoot(document.getElementById("root"));
+		root.render(
+		<>
+			
+			<Navbar />
+			<AirToAir />
+			
+		</>
+	);
+	</script>
+
+
+</body>
+</html>
