@@ -1,0 +1,749 @@
+@font-face {
+	font-family: "Helvetica Now Text";
+	src: url("HelveticaNowText-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Helvetica Now Text";
+	src: url("HelveticaNowText-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Alliance No.2";
+	src: url("Alliance No.2 Regular.otf") format("opentype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+html, body {
+	width: 100%;
+	overflow-x: hidden;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.hero-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 0;
+	pointer-events: none;
+}
+
+.hero-overlay h1 {
+	color: #ffffff;
+	font-family: "Alliance No.2", "Helvetica Now Text", Arial, sans-serif;
+	font-weight: 700;
+	font-size: clamp(32px, 6vw, 72px);
+	letter-spacing: 0.02em;
+	text-align: center;
+	padding: 0 24px;
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
+	background: #000000;
+	border-bottom: 1px solid #222222;
+	position: relative;
+	z-index: 2;
+	gap: 16px;
+}
+.nav-wrapper {
+	position: relative;
+	background: #000000;
+}
+
+.nav-links {
+	display: flex;
+	list-style: none;
+	gap: 20px;
+	flex-wrap: nowrap;
+}
+
+.nav-links a {
+	font-size: 13px;
+}
+
+.nav-logo {
+	width: 100px;
+	height: auto;
+}
+
+.nav-links {
+	display: flex;
+	list-style: none;
+	gap: 32px;
+}
+
+.nav-links a {
+	color: #ffffff;
+	text-decoration: none;
+	font-family: "Helvetica Now Text";
+	font-size: 14px;
+	letter-spacing: 0.05em;
+}
+
+.nav-links a:hover {
+	color: #aaaaaa;
+}
+.nav-cart {
+	width: 22px;
+	height: auto;
+	cursor: pointer;
+}
+
+.nav-cart {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #ffffff;
+	text-decoration: none;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.05em;
+	cursor: pointer;
+	transition: color 0.2s ease;
+	white-space: nowrap;
+	flex-shrink: 0;
+	margin-right: 124px;
+}
+
+.nav-cart:hover {
+	color: #aaaaaa;
+}
+
+.nav-cart-icon {
+	width: 18px;
+	height: auto;
+}
+
+
+.nav-panel {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background: #000000;
+	border-bottom: 1px solid #222222;
+	z-index: 1;
+	opacity: 0;
+	transform: translateY(-12px);
+	pointer-events: none;
+	transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-panel.open {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto;
+}
+
+.nav-panel-content {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+	padding: 32px 40px;
+	opacity: 0;
+	transform: translateY(-6px);
+	transition: opacity 0.35s ease, transform 0.35s ease;
+	transition-delay: 0.05s;
+}
+
+.nav-panel.open .nav-panel-content {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.nav-panel-image {
+	width: 320px;
+	height: 180px;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+.nav-panel-text {
+	max-width: 420px;
+}
+
+.nav-panel-text h3 {
+	color: #ffffff;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: 0.02em;
+	margin-bottom: 10px;
+}
+
+.nav-panel-text p {
+	color: #aaaaaa;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.nav-panel.open .nav-panel-links li {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.nav-panel.open .nav-panel-links li:nth-child(1) { transition-delay: 0.05s; }
+.nav-panel.open .nav-panel-links li:nth-child(2) { transition-delay: 0.1s; }
+.nav-panel.open .nav-panel-links li:nth-child(3) { transition-delay: 0.15s; }
+.nav-panel.open .nav-panel-links li:nth-child(4) { transition-delay: 0.2s; }
+
+
+
+.nav-panel-links a:hover {
+	color: #ffffff;
+}
+
+.bg-slider {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	overflow: hidden;
+}
+
+.bg-slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	opacity: 0;
+	transition: opacity 1.5s ease;
+}
+
+.bg-slide.active {
+	opacity: 1;
+}
+.spacer {
+	height: 100vh;
+}
+
+.mission {
+	background: #000000;
+	padding: 120px 40px;
+	position: relative;
+	z-index: 1;
+}
+
+.mission {
+	background: #000000;
+	padding: 120px 40px;
+	position: relative;
+	z-index: 1;
+}
+
+.mission-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 60px;
+}
+
+.mission-image {
+	width: 50%;
+	height: 420px;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+.mission-text {
+	flex: 1;
+}
+
+.mission-text h2 {
+	color: #ffffff;
+	font-family: "Alliance No.2";
+	font-weight: 700;
+	font-size: clamp(28px, 4vw, 44px);
+	letter-spacing: 0.02em;
+	margin-bottom: 24px;
+}
+
+.mission-text p {
+	color: #aaaaaa;
+	font-family: "Alliance No.2";
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.7;
+}
+.air-to-air-page {
+	background: #000000;
+	min-height: 100vh;
+	padding: 140px 40px 80px;
+}
+
+.air-to-air-page h1 {
+	color: #ffffff;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-weight: 700;
+	font-size: clamp(28px, 4vw, 44px);
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.controls {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+	margin-bottom: 50px;
+}
+
+.control-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.control-group label {
+	color: #aaaaaa;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-size: 12px;
+	letter-spacing: 0.05em;
+}
+
+.control-group select {
+	background: #111111;
+	color: #ffffff;
+	border: 1px solid #333333;
+	padding: 8px 12px;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 14px;
+}
+
+.missile-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 30px;
+	max-width: 1200px;
+	margin: 0 auto;
+	align-items: start;
+	justify-content: center;
+}
+
+.missile-card {
+	background: #0a0a0a;
+	border: 1px solid #222222;
+	max-width: 320px;
+	width: 100%;
+}
+
+.missile-card-top {
+	position: relative;
+	padding: 20px;
+	text-align: center;
+}
+
+.missile-image {
+	width: 100%;
+	height: 140px;
+	object-fit: contain;
+	margin-bottom: 16px;
+}
+
+.missile-card-top h3 {
+	color: #ffffff;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+
+.missile-cost {
+	color: #aaaaaa;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 14px;
+}
+
+.missile-details {
+	max-height: 0;
+	overflow: hidden;
+	border-top: 1px solid transparent;
+	transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 0.35s ease;
+}
+
+.missile-details.open {
+	max-height: 280px;
+	border-top: 1px solid #222222;
+}
+
+.missile-detail-row {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 20px;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-size: 13px;
+}
+
+.detail-label {
+	color: #777777;
+	letter-spacing: 0.04em;
+}
+
+.detail-value {
+	color: #ffffff;
+	text-align: right;
+}
+.contact-sales-btn {
+	display: block;
+	width: calc(100% - 40px);
+	margin: 8px 20px 20px;
+	padding: 10px 0;
+	background: black;
+	color: white;
+	border: none;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-weight: 700;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.contact-sales-btn:hover {
+	background: #1f1f1f;
+}
+.expand-icon {
+	position: absolute;
+	bottom: 12px;
+	right: 16px;
+	color: #ffffff;
+	font-family: "Alliance No.2",Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1;
+	transition: transform 0.3s ease;
+	pointer-events: none;
+}
+
+.expand-icon.open {
+	transform: rotate(45deg);
+}
+.procurement-page {
+	background: #000000;
+	min-height: 100vh;
+	padding: 140px 40px 80px;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.procurement-page h1 {
+	color: #ffffff;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-weight: 700;
+	font-size: clamp(28px, 4vw, 40px);
+	margin-bottom: 12px;
+}
+
+.procurement-product {
+	color: #aaaaaa;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 15px;
+	margin-bottom: 40px;
+}
+
+.procurement-product strong {
+	color: #ffffff;
+}
+
+.procurement-form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.procurement-form label {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	color: #aaaaaa;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+}
+
+.procurement-form input {
+	background: #111111;
+	color: #ffffff;
+	border: 1px solid #333333;
+	padding: 10px 12px;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 14px;
+}
+
+.procurement-form input:focus {
+	outline: none;
+	border-color: #ffffff;
+}
+
+.procurement-submit {
+	margin-top: 12px;
+	padding: 14px 0;
+	background: #ffffff;
+	color: #000000;
+	border: none;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.procurement-submit:hover:not(:disabled) {
+	background: #cccccc;
+}
+
+.procurement-submit:disabled {
+	background: #333333;
+	color: #777777;
+	cursor: not-allowed;
+}
+.procurement-items {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.procurement-items-label {
+	color: #aaaaaa;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+}
+
+.procurement-item-row {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.procurement-item-row select {
+	flex: 1;
+	background: #111111;
+	color: #ffffff;
+	border: 1px solid #333333;
+	padding: 10px 12px;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 14px;
+}
+
+.procurement-item-row input {
+	width: 80px;
+	background: #111111;
+	color: #ffffff;
+	border: 1px solid #333333;
+	padding: 10px 12px;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 14px;
+}
+
+.remove-item-btn {
+	background: transparent;
+	color: #aaaaaa;
+	border: 1px solid #333333;
+	padding: 10px 14px;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 12px;
+	cursor: pointer;
+	transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.remove-item-btn:hover {
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+.add-item-btn {
+	background: transparent;
+	color: #ffffff;
+	border: 1px dashed #444444;
+	padding: 12px 0;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	transition: border-color 0.2s ease;
+}
+
+.add-item-btn:hover {
+	border-color: #ffffff;
+}
+.recorded h1 {
+	font-family: "Alliance No.2";
+	color: white;
+}
+
+.recorded h2 {
+	font-family: "Alliance No.2";
+	color: #2e2e2e;
+}
+
+.recorded h3 {
+	font-family: "Helvetica Now Text";
+	color: white;
+}
+.recorded h5 {
+	font-family: "Helvetica Now Text";
+	color: white;
+}
+
+.recorded {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	text-align: center;
+	gap: 16px;
+	padding: 40px;
+}
+.nav-panel-ticker {
+	flex: 1;
+	height: 180px;
+	overflow: hidden;
+	position: relative;
+	mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+	-webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.ticker-track {
+	display: flex;
+	flex-direction: column;
+	animation: scroll-vertical 12s linear infinite;
+}
+
+.ticker-item {
+	color: #aaaaaa;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-size: 14px;
+	letter-spacing: 0.03em;
+	padding: 10px 0;
+	white-space: nowrap;
+}
+
+@keyframes scroll-vertical {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-50%);
+	}
+}
+.confirm-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.75);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+}
+
+.confirm-modal {
+	background: #0a0a0a;
+	border: 1px solid #333333;
+	padding: 32px;
+	max-width: 440px;
+	width: 90%;
+}
+
+.confirm-modal h2 {
+	color: #ffffff;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-weight: 700;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.confirm-detail {
+	color: #cccccc;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.confirm-detail strong {
+	color: #ffffff;
+}
+
+.confirm-items-list {
+	margin: 12px 0;
+	padding: 12px 0;
+	border-top: 1px solid #222222;
+	border-bottom: 1px solid #222222;
+}
+
+.confirm-warning {
+	color: #aaaaaa;
+	font-family: "Helvetica Now Text", Arial, sans-serif;
+	font-size: 13px;
+	margin: 16px 0 24px;
+}
+
+.confirm-buttons {
+	display: flex;
+	gap: 12px;
+}
+
+.confirm-back-btn,
+.confirm-proceed-btn {
+	flex: 1;
+	padding: 12px 0;
+	border: none;
+	font-family: "Alliance No.2", Arial, sans-serif;
+	font-weight: 700;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.confirm-back-btn {
+	background: transparent;
+	color: #ffffff;
+	border: 1px solid #444444;
+}
+
+.confirm-back-btn:hover {
+	border-color: #ffffff;
+}
+
+.confirm-proceed-btn {
+	background: #ffffff;
+	color: #000000;
+}
+
+.confirm-proceed-btn:hover {
+	background: #cccccc;
+}
