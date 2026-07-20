@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="diamondstyle.css">
+	<title>ApeChecker</title>
+</head>
+<body>
+	<div class="bg-watermark"></div>
+	<button class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+		<img src="uk.svg.webp" alt="English" id="lang-flag-img" class="lang-flag-img">
+	</button>
+	<div class="site-title">
+		<img src="site-title-logo.png" alt="ApeChecker">
+	</div>
+	<div class="hero-section">
+	<p class="hero-line">
+	<span data-i18n="hero_pre">If you invested</span>
+	<input type="number" id="invest-amount" class="amount-input" value="1000" min="0" step="100">
+	<span data-i18n="hero_mid">, after</span>
+	<span id="hero-period-label">1 Year</span>
+	<span data-i18n="hero_post">, you would have</span>
+</p>
+<div class="hero-results">
+	<div class="hero-result-card">
+		<span class="hero-result-label" data-i18n="hero_wsb_label">WSB portfolio</span>
+		<span class="hero-result-value" id="wsb-result-value">$0.00</span>
+	</div>
+	<div class="hero-result-card">
+		<span class="hero-result-label" data-i18n="hero_etf_label">ETF portfolio</span>
+		<span class="hero-result-value" id="etf-result-value">$0.00</span>
+	</div>
+</div>
+<p class="hero-disclaimer" data-i18n="hero_disclaimer">Based on median return across each list's holdings, so one or two extreme outlier stocks don't dominate the number.</p>
+</div>
+	<div class="dashboard-shell">
+		<div class="period-sidebar">
+			<button class="mode-btn" data-period="1m">
+				<span>1 Month</span>
+			</button>
+			<button class="mode-btn" data-period="3m">
+				<span>3 Months</span>
+			</button>
+			<button class="mode-btn" data-period="6m">
+				<span>6 Months</span>
+			</button>
+			<button class="mode-btn" data-period="1y">
+				<span>1 Year</span>
+			</button>
+		</div>
+		<div class="dashboard-content">
+			<div class="viewport-container">
+				<div class="viewport" id="board-viewport">
+					<span class="viewport-label" data-i18n="viewport_earnings">Earnings Comparison</span>
+					<canvas id="earnings-chart"></canvas>
+				</div>
+				<div class="viewport" id="camera-viewport">
+					<span class="viewport-label" data-i18n="viewport_sentiment">WSB Mention Volume</span>
+					<span class="viewport-sublabel" data-i18n="viewport_sentiment_sub">Mentions, last 24h</span>
+					<canvas id="sentiment-chart"></canvas>
+				</div>
+				<div class="viewport-sidebar">
+					<button class="engine-btn" id="engine-config-btn">
+					<img src="bars.png" alt="" class="engine-icon">
+					<span data-i18n="engine_bar">Bar Chart</span>
+				</button>
+				<button class="engine-btn" id="scatter-btn">
+					<img src="scatter.png" alt="" class="engine-icon">
+					<span data-i18n="engine_scatter">Scatter Plot</span>
+				</button>
+				<button class="engine-btn" id="linechart-btn">
+					<img src="lines.png" alt="" class="engine-icon">
+					<span data-i18n="engine_line">Line Chart</span>
+				</button>
+				</div>
+			</div>
+			<div class="viewport-container viewport-container-secondary">
+				<div class="viewport" id="etf-list-viewport">
+					<span class="viewport-label" data-i18n="viewport_etf">VOO Top 20</span>
+					<div class="scroll-list" id="etf-list-track-container"></div>
+				</div>
+				<div class="viewport" id="wsb-list-viewport">
+					<span class="viewport-label" data-i18n="viewport_wsb">WSB Picks</span>
+					<div class="scroll-list" id="wsb-list-track-container"></div>
+				</div>
+				<div class="viewport-sidebar" aria-hidden="true" style="visibility: hidden;"></div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
