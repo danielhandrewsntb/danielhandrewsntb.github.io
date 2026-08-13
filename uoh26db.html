@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="stylep2.css">
+	<title>about/work - Daniel Andrews</title>
+</head>
+<body>
+	<div class="divider"><span>about/work</span></div>
+	<p>This being our first hackathon, I teamed up with three of my high school friends to compete. The official start time was late enough in the day so that we could only really hope to pinpoint an idea for a project we wanted to submit. Some difficulty encountered in this stage was managing to harmonize the ideas we came up with and the given categories we had to submit to (best use of Gemini API, Raspberry Pi, Solana, etc.).
+
+After much deliberation, we settled on the idea of a browser extension that would incorporate the Google Gemini API to scan opened emails and alert you to any danger it found lying within (with a danger score and succinct reasoning).
+
+Getting the project to be a web extension ended up being the easiest part. Almost all of our difficulties came in navigating the javascript portion of this (the actual technical part of it). The extension needed to detect when a gmail user was viewing an email, extract the email from the page, send it off to Gemini, and then receive and display Gemini’s verdict. This proved to be difficult due to our limited access to Gemini API keys for testing (troubleshooting), and demonstration within a certain timeframe. Ultimately, we had to resort to periodically switching between about 3 language models for their API keys, which drastically slowed development.
+
+In addition to this, it didn’t help that because of our unfamiliarity in dealing with the Gemini API, we resorted to using said LLMs  to debug and troubleshoot, which often created a sort of “black box effect” where which you ended up with a piece of code that you had an idea of what it did, but you weren’t exactly sure how it worked. I personally struggle with this as I believe that in order to properly debug a codebase, you have to understand how it works. This created an effect by which through iteration and iteration of the project, we relied more and more on the LLM to debug and make adjustments.
+
+All in all, we did reach a version of the project that worked, but it was slow, and inconsistent in its alert system (which was supposed to always be succinct and to the point). It certainly was not consumer ready (functionality being only half the concerns, and security being the other), but we were focused on delivering a demonstrable project at the time for the sake of the event.
+
+For future hackathons, it would be expedient to go in with a general idea of what we want to do, and then adapt it to the categories available. This would save much time in brainstorming and allow for more time spent implementing, testing, and polishing. It would also help to go in with a sort of “basic toolkit”, which could be a codebase from github you would like to make use of, or just a set of general skills you are comfortable with that you believe you could make use of during the competition.
+</p>
+
+</body>
+</html>
